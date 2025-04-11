@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechEd - Learn Tech Skills</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>TechEd</h1>
+        <!-- Malik's login/signup buttons here -->
+        <div id="auth-placeholder"></div>
+    </header>
+    
+    <main>
+        <section class="course-grid">
+            <div class="course-card" onclick="location.href='courses/python.html'">
+                <h2>Python Programming</h2>
+                <p>Learn Python from basics to advanced</p>
+                <div class="progress-bar" data-course="python">
+                    <div class="progress"></div>
+                </div>
+            </div>
+            
+            <div class="course-card" onclick="location.href='courses/webdev.html'">
+                <h2>Web Development</h2>
+                <p>Master HTML, CSS, and JavaScript</p>
+                <div class="progress-bar" data-course="webdev">
+                    <div class="progress"></div>
+                </div>
+            </div>
+            
+            <div class="course-card" onclick="location.href='courses/cybersecurity.html'">
+                <h2>Cybersecurity</h2>
+                <p>Learn to secure systems and networks</p>
+                <div class="progress-bar" data-course="cybersecurity">
+                    <div class="progress"></div>
+                </div>
+            </div>
+            
+            <div class="course-card" onclick="location.href='courses/java.html'">
+                <h2>Java Programming</h2>
+                <p>Object-oriented programming with Java</p>
+                <div class="progress-bar" data-course="java">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Programming",
+      "description": "Software development courses"
+    }
+  ],
+  "instructors": [
+    {
+      "id": 1,
+      "name": "Professor Oak",
+      "bio": "Professor Oak is a veteran software engineer and educator with over 15 years of experience teaching Python programming. Known for his clear explanations and practical approach, he has guided thousands of students from beginner to advanced levels. His background includes work in automation, web development, and data analysis. Oak's passion lies in making Python accessible to everyone, with a focus on real-world application and hands-on learning. He is also an advocate for open-source contributions and regularly mentors aspiring developers online.",
+      "legacy": "Senior Lecturer in Python and Software Engineering",
+      "email": "oak@example.com",
+      "image": "images/prof/prof-oak.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Professor Elm",
+      "bio": "Professor Elm is a full-stack developer and educator specializing in building modern, responsive web applications. With a strong foundation in front-end and back-end technologies—HTML, CSS, JavaScript, React, Node.js, and MongoDB—she combines technical depth with a passion for teaching. Elm has worked with startups and enterprise teams alike, bringing real industry insight into the virtual classroom. Her teaching style is project-focused and student-centered, empowering learners to build full applications with confidence.",
+      "legacy": "elm@example.com",
+      "email": "elm@example.com",
+      "image": "images/prof/prof-elm.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Professor Birch",
+      "bio": "Professor Birch is a certified cybersecurity professional with a decade of experience in ethical hacking, threat analysis, and digital forensics. He's worked in both government and private sectors, leading penetration testing initiatives and designing robust defense protocols. As an instructor, Birch emphasizes a hands-on approach to learning, walking students through real-world scenarios and cybersecurity labs. His mission is to prepare the next generation of ethical hackers and security experts to defend against evolving digital threats.",
+      "legacy": "Cybersecurity Analyst & Online Instructor",
+      "email": "birch@example.com",
+      "image": "images/prof/prof-birch.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Professor Rowan",
+      "bio": "Professor Rowan is an enterprise software architect and Java expert with over 12 years of experience designing large-scale applications. She has worked in fintech, healthcare, and education tech, using Java to build scalable, secure systems. As a professor, she brings structure and clarity to complex topics like object-oriented programming, Spring Framework, and enterprise-level architecture. Rowan's classes are known for bridging the gap between academic learning and real-world Java development.",
+      "legacy": "Professor of Java Development and Enterprise Software",
+      "email": "rowan@example.com",
+      "image": "image/prof/prof-rowan.jpg"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "title": "Python Programming Masterclass",
+      "instructorId": 1,
+      "categoryId": 1,
+      "shortDescription": "Learn Python from scratch to advanced level.",
+      "fullDescription": "This comprehensive course takes you from Python basics to advanced concepts, covering everything from setting up your environment and understanding syntax to mastering data structures, algorithms, and object-oriented programming. You'll learn to work with databases, APIs, and frameworks, and gain the skills to tackle real-world projects and coding challenges. Whether you're aiming for a career in Python development or working on data analysis and machine learning, this course equips you with the expertise you need to succeed.",
+      "chapterDescription": "This chapter covers all the fundamentals of Python programming, from basic syntax to object-oriented concepts. You'll learn how to write clean, efficient Python code and understand core programming concepts that apply to any language.",
+      "duration": "4 weeks",
+      "level": "Beginner to Intermediate",
+      "content": [
+        {
+          "id": "python_basics",
+          "type": "video",
+          "title": "Python Basics & Syntax",
+          "duration": "166:52",
+          "url": "https://www.youtube.com/embed/rfscVS0vtbw",
+          "description": "Learn the fundamentals of Python syntax, variables, and basic operations.",
+          "completed": false
+        },
+        {
+          "id": "python_data_structures",
+          "type": "video",
+          "title": "Data Structures in Python",
+          "duration": "19:01",
+          "url": "https://youtu.be/R-HLU9Fl5ug?si=Ppc7BolbI_REswMQ",
+          "description": "Explore lists, tuples, dictionaries, and sets in Python.",
+          "completed": false,
+          "prerequisites": ["python_basics"]
+        },
+        {
+          "id": "python_oop",
+          "type": "video",
+          "title": "Object-Oriented Programming",
+          "duration": "53:06",
+          "url": "https://www.youtube.com/embed/JeznW_7DlB0",
+          "description": "Learn about classes, objects, inheritance, and polymorphism in Python.",
+          "completed": false,
+          "prerequisites": ["python_data_structures"]
+        },
+        {
+          "id": "python_quiz",
+          "type": "quiz",
+          "title": "Python Fundamentals Quiz",
+          "duration": "3:00",
+          "completed": false,
+          "prerequisites": ["python_oop"],
+          "questions": [
+            {
+              "question": "What is the correct syntax to create a Python function?",
+              "options": [
+                {"text": "function myFunction():", "correct": false},
+                {"text": "def my_function():", "correct": true},
+                {"text": "create myFunction():", "correct": false},
+                {"text": "func myFunction():", "correct": false}
+              ]
+            },
+            {
+              "question": "Which of these is NOT a Python data structure?",
+              "options": [
+                {"text": "List", "correct": false},
+                {"text": "Tuple", "correct": false},
+                {"text": "Array", "correct": true},
+                {"text": "Dictionary", "correct": false}
+              ]
+            },
+            {
+              "question": "How do you create a class in Python?",
+              "options": [
+                {"text": "class MyClass:", "correct": true},
+                {"text": "def MyClass():", "correct": false},
+                {"text": "new class MyClass:", "correct": false},
+                {"text": "create class MyClass:", "correct": false}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Complete Web Development Bootcamp",
+      "instructorId": 2,
+      "categoryId": 1,
+      "shortDescription": "Full-stack web development course.",
+      "fullDescription": "This course teaches full-stack web development with HTML, CSS, JavaScript, React, Node.js, and MongoDB, equipping you to build both front-end and back-end applications. You'll learn to create responsive websites, develop dynamic user interfaces, and manage server-side functionality, giving you the skills to build complete web applications from start to finish.",
+      "duration": "6 weeks",
+      "level": "Beginner to Advanced",
+      "content": [
+        {
+          "id": "web_html_css",
+          "type": "video",
+          "title": "HTML & CSS Fundamentals",
+          "duration": "60:42",
+          "url": "https://www.youtube.com/embed/UB1O30fR-EE",
+          "description": "Learn the basics of HTML structure and CSS styling.",
+          "completed": false
+        },
+        {
+          "id": "web_js",
+          "type": "video",
+          "title": "JavaScript Basics",
+          "duration": "48:17",
+          "url": "https://www.youtube.com/embed/W6NZfCO5SIk",
+          "description": "Introduction to JavaScript programming fundamentals.",
+          "completed": false,
+          "prerequisites": ["web_html_css"]
+        },
+        {
+          "id": "web_react",
+          "type": "video",
+          "title": "React Crash Course",
+          "duration": "108:48",
+          "url": "https://www.youtube.com/embed/w7ejDZ8SWv8",
+          "description": "Learn React components, state, and props.",
+          "completed": false,
+          "prerequisites": ["web_js"]
+        },
+        {
+          "id": "web_node",
+          "type": "video",
+          "title": "Node.js & Express",
+          "duration": "496:48",
+          "url": "https://www.youtube.com/embed/Oe421EPjeBE",
+          "description": "Introduction to server-side JavaScript with Node.js.",
+          "completed": false,
+          "prerequisites": ["web_js"]
+        },
+        {
+          "id": "web_frontend_quiz",
+          "type": "quiz",
+          "title": "Front-end Development Quiz",
+          "duration": "2:00",
+          "completed": false,
+          "prerequisites": ["web_react"],
+          "questions": [
+            {
+              "question": "Which HTML tag is used for creating a hyperlink?",
+              "options": [
+                {"text": "<link>", "correct": false},
+                {"text": "<a>", "correct": true},
+                {"text": "<href>", "correct": false},
+                {"text": "<hyperlink>", "correct": false}
+              ]
+            },
+            {
+              "question": "What does CSS stand for?",
+              "options": [
+                {"text": "Computer Style Sheets", "correct": false},
+                {"text": "Creative Style Sheets", "correct": false},
+                {"text": "Cascading Style Sheets", "correct": true},
+                {"text": "Colorful Style Sheets", "correct": false}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "web_backend_quiz",
+          "type": "quiz",
+          "title": "Back-end Development Quiz",
+          "duration": "1:00",
+          "completed": false,
+          "prerequisites": ["web_node"],
+          "questions": [
+            {
+              "question": "What is Node.js?",
+              "options": [
+                {"text": "A JavaScript framework", "correct": false},
+                {"text": "A JavaScript runtime environment", "correct": true},
+                {"text": "A JavaScript library", "correct": false},
+                {"text": "A JavaScript compiler", "correct": false}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cybersecurity Fundamentals",
+      "instructorId": 3,
+      "categoryId": 1,
+      "shortDescription": "This course covers essential cybersecurity concepts",
+      "fullDescription": "including ethical hacking, threat detection, and system protection strategies. You'll learn how to safeguard networks, identify vulnerabilities, and apply best practices to defend against cyber attacks. Whether you're new to cybersecurity or looking to expand your knowledge, this course will provide the foundational skills needed to protect systems and data in today's digital world.",
+      "duration": "4 weeks",
+      "level": "Intermediate",
+      "content": [
+        {
+          "id": "cyber_intro",
+          "type": "video",
+          "title": "Introduction to Cybersecurity",
+          "duration": "07:07",
+          "url": "https://www.youtube.com/embed/inWWhr5tnEA",
+          "description": "Overview of cybersecurity concepts and importance.",
+          "completed": false
+        },
+        {
+          "id": "cyber_network",
+          "type": "video",
+          "title": "Network Security",
+          "duration": "23:56",
+          "url": "https://youtu.be/NQ1cvwEvh44?si=s28M3yJsBq6sKXA_", 
+          "description": "Learn about network vulnerabilities and protection methods.",
+          "completed": false,
+          "prerequisites": ["cyber_intro"]
+        },
+        {
+          "id": "cyber_crypto",
+          "type": "video",
+          "title": "Cryptography Basics",
+          "duration": "12:33",
+          "url": "https://youtu.be/jhXCTbFnK8o?si=Ko7EkONu2nx_LIu2",
+          "description": "Introduction to encryption and decryption techniques.",
+          "completed": false,
+          "prerequisites": ["cyber_network"]
+        },
+        {
+          "id": "cyber_quiz",
+          "type": "quiz",
+          "title": "Cybersecurity Knowledge Quiz",
+          "duration": "02:00",
+          "completed": false,
+          "prerequisites": ["cyber_crypto"],
+          "questions": [
+            {
+              "question": "What is the primary goal of cybersecurity?",
+              "options": [
+                {"text": "To protect systems and data from digital attacks", "correct": true},
+                {"text": "To create faster computers", "correct": false},
+                {"text": "To develop new programming languages", "correct": false},
+                {"text": "To design user interfaces", "correct": false}
+              ]
+            },
+            {
+              "question": "What does VPN stand for?",
+              "options": [
+                {"text": "Virtual Private Network", "correct": true},
+                {"text": "Very Protected Network", "correct": false},
+                {"text": "Verified Private Node", "correct": false},
+                {"text": "Virtual Public Network", "correct": false}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Java Programming: From Basics to Advanced",
+      "instructorId": 4,
+      "categoryId": 1,
+      "shortDescription": "This course helps you master the Java programming language",
+      "fullDescription": "starting with core concepts and progressing to advanced topics like frameworks and enterprise-level development. You'll learn how to build scalable applications, work with Java libraries, and develop software solutions for real-world business needs. By the end of the course, you'll be proficient in Java and ready to tackle complex projects in the enterprise development space.",
+      "duration": "5 weeks",
+      "level": "Beginner to Advanced",
+      "content": [
+        {
+          "id": "java_basics",
+          "type": "video",
+          "title": "Java Syntax & Basics",
+          "duration": "150:48",
+          "url": "https://www.youtube.com/embed/eIrMbAQSU34",
+          "description": "Learn Java syntax, variables, and basic programming concepts.",
+          "completed": false
+        },
+        {
+          "id": "java_oop",
+          "type": "video",
+          "title": "Object-Oriented Programming in Java",
+          "duration": "10:05",
+          "url": "https://youtu.be/CWYv7xlKydw?si=pa4LyWSo9kSCiqk5",
+          "description": "Introduction to OOP concepts in Java.",
+          "completed": false,
+          "prerequisites": ["java_basics"]
+        },
+        {
+          "id": "java_collections",
+          "type": "video",
+          "title": "Collections Framework",
+          "duration": "10:39",
+          "url": "https://youtu.be/viTHc_4XfCA?si=5H1kKRa3QR_OAivT",
+          "description": "Learn about Java collections like ArrayList, HashMap, etc.",
+          "completed": false,
+          "prerequisites": ["java_oop"]
+        },
+        {
+          "id": "java_spring",
+          "type": "video",
+          "title": "Spring Boot Introduction",
+          "duration": "109:29",
+          "url": "https://www.youtube.com/embed/vtPkZShrvXQ",
+          "description": "Introduction to Spring Boot framework.",
+          "completed": false,
+          "prerequisites": ["java_collections"]
+        },
+        {
+          "id": "java_quiz",
+          "type": "quiz",
+          "title": "Java Programming Quiz",
+          "duration": "02:00",
+          "completed": false,
+          "prerequisites": ["java_spring"],
+          "questions": [
+            {
+              "question": "Which keyword is used to define a class in Java?",
+              "options": [
+                {"text": "class", "correct": true},
+                {"text": "def", "correct": false},
+                {"text": "struct", "correct": false},
+                {"text": "object", "correct": false}
+              ]
+            },
+            {
+              "question": "What is the entry point of a Java program?",
+              "options": [
+                {"text": "main() method", "correct": true},
+                {"text": "init() method", "correct": false},
+                {"text": "start() method", "correct": false},
+                {"text": "run() method", "correct": false}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "courseId": 1,
+      "user": "Hussein",
+      "rating": 5,
+      "comment": "Perfect for beginners! The projects really helped solidify my learning.",
+      "date": "2025-01-17"
+    },
+    {
+      "id": 2,
+      "courseId": 1,
+      "user": "Abdullah",
+      "rating": 4,
+      "comment": "Great content, but some sections could use more examples.",
+      "date": "2024-02-16"
+    },
+    {
+      "id": 3,
+      "courseId": 1,
+      "user": "Afia",
+      "rating": 3,
+      "comment": "Decent course overall, but some of the videos could be updated",
+      "date": "2024-02-25"
+    },
+    {
+      "id": 4,
+      "courseId": 1,
+      "user": "Yousaf",
+      "rating": 4,
+      "comment": "Great content, but some sections could use more examples.",
+      "date": "2025-02-06"
+    },
+    {
+      "id": 5,
+      "courseId": 2,
+      "user": "Kansa",
+      "rating": 5,
+      "comment": "Changed my career! Landed a web dev job after completing this.",
+      "date": "2025-02-26"
+    },
+    {
+      "id": 6,
+      "courseId": 2,
+      "user": "Felicia",
+      "rating": 5,
+      "comment": "Awesome course! HTML, CSS, and JavaScript were explained clearly. Built my first website by the end!",
+      "date": "2025-03-06"
+    },
+    {
+      "id": 7,
+      "courseId": 2,
+      "user": "Malik",
+      "rating": 4,
+      "comment": "Very solid content. could use more in-depth coverage on responsive design, but still bery helpful",
+      "date": "2024-03-08"
+    },
+    {
+      "id": 8,
+      "courseId": 2,
+      "user": "Hakan",
+      "rating": 5,
+      "comment": "Loved the project-based structure. Seeing real-world examples helped everything click",
+      "date": "2024-05-21"
+    },
+    {
+      "id": 9,
+      "courseId": 3,
+      "user": "Fitz-coy",
+      "rating": 4,
+      "comment": "Excellent content on network security!",
+      "date": "2025-05-30"
+    },
+    {
+      "id": 10,
+      "courseId": 3,
+      "user": "Amir",
+      "rating": 5,
+      "comment": "Super informative! I aspire to be an ethical hacker and this course was especially intereting in that regard",
+      "date": "2024-06-03"
+    },
+    {
+      "id": 11,
+      "courseId": 3,
+      "user": "Evin",
+      "rating": 4,
+      "comment": "great into to cyber-sec concepts.",
+      "date": "2025-01-31"
+    },
+    {
+      "id": 12,
+      "courseId": 3,
+      "user": "Kiki",
+      "rating": 5,
+      "comment": "Well structured and easy to follow. I feel much more confident about onliine security now that i've completed this course.",
+      "date": "2024-09-03"
+    },
+    {
+      "id": 13,
+      "courseId": 4,
+      "user": "Mohamed",
+      "rating": 5,
+      "comment": "Perfect for anyone wanting to learn Java properly.",
+      "date": "2025-01-10"
+    },
+    {
+      "id": 14,
+      "courseId": 4,
+      "user": "Qais",
+      "rating": 4,
+      "comment": "Great course, but could use more examples on Spring Boot.",
+      "date": "2025-03-25"
+    },
+    {
+      "id": 15,
+      "courseId": 4,
+      "user": "Simran",
+      "rating": 4,
+      "comment": "Good course for getting started with Java. Some parats were a bit fast based, but overall it was great",
+      "date": "2024-09-19"
+    },
+    {
+      "id": 16,
+      "courseId": 4,
+      "user": "Marvin",
+      "rating": 4,
+      "comment": "Clear explanations and practical examples. The object-oriented programming section was top-notch.",
+      "date": "2025-01-01"
+    }
+  ]
+}

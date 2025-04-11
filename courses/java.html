@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java | TechEd</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .content-item.locked {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .content-item.locked .content-icon {
+            position: relative;
+        }
+
+        .content-item.locked .content-icon .fa-lock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 1.5em;
+        }
+
+        .quiz-option {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            background: #e2e6ea;
+        }
+
+        .quiz-option.selected {
+            background: #d4edda;
+        }
+
+        .quiz-feedback {
+            margin: 10px 0;
+            padding: 10px;
+            display: none;
+        }
+
+        .quiz-feedback.correct {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .quiz-feedback.incorrect {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .quiz-feedback.error {
+            display: block;
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .video-completion {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+      <div class="container">
+        <h1 class="course-title" id="course-title"> Java Programming Masterclass</h1>
+        
+        <div class="course-meta">
+            <span><i class="fas fa-signal"></i> <span id="course-level">Beginner to Advanced</span></span>
+            <span><i class="fas fa-clock"></i> <span id="course-duration">5 weeks</span></span>
+            <span><i class="fas fa-play-circle"></i> <span id="course-content">5 modules</span></span>
+        </div>
+        
+        <div class="course-actions">
+            <button class="btn btn-primary" id="start-btn">Start Course</button>
+            <button class="btn btn-secondary" id="bookmark-btn">
+                <i class="far fa-bookmark"></i> Bookmark
+            </button>
+        </div>
+        
+        <div class="course-description collapsed" id="course-description">
+            <!-- The course desc will appear here once JSON does its thing -->
+        </div>
+        <span class="read-more" id="read-more">Read More</span>
+    </div>
+  </header>
+    
+    <main class="course-container">
+        <div class="course-chapter">
+            <div class="chapter-header">
+                <h2 class="chapter-title" id="chapter-title">Java Fundamentals</h2>
+                <p class="chapter-description" id="chapter-description"></p>
+                <div class="progress-chapter">
+                    <div class="progress" id="chapter-progress"></div>
+                    <span id="progress-text">0% Complete</span>
+                </div>
+                <div class="toggle-details" id="toggle-details">▼ Show Chapter Details</div>
+            </div>
+            
+            <div class="chapter-content" id="chapter-content">
+                <!-- Content will be loaded here from JSON -->
+            </div>
+            
+            <button class="continue-btn" id="continue-btn">Continue Learning</button>
+        </div>
+
+        <div class="course-sidebar">
+            <div class="instructor-card" id="instructor-card">
+                <!-- Content will also be loaded from JSON -->
+                <div class="instructor-header">
+                    <img src="PROFESSOR_IMAGE_URL_FROM_JSON" alt="Professor Name" class="professor-img">
+                    <div>
+                        <h3 class="instructor-name" id="instructor-name">Instructor</h3>
+                        <p class="instructor-title" id="instructor-title">Position</p>
+                    </div>
+                </div>
+                <p class="instructor-bio" id="instructor-bio">Loading bio...</p>
+            </div>
+        </div>
+
+        <section class="course-reviews">
+            <div class="container">
+                <!-- Reviews Section -->
+                <h2 class="section-title">Student Reviews</h2>
+                <div class="reviews-grid" id="reviews-container">
+                    <!-- Reviews will be loaded here -->
+                </div>
+                
+                <!-- FAQ Section -->
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What prerequisites do I need for this course?</span>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            This course is designed for beginners. No prior programming experience is required, though basic computer skills are recommended.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How long will I have access to the course materials?</span>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            You'll have lifetime access to all course materials, including any future updates we make to the content.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Will I receive a certificate upon completion?</span>
+                            <i class="fas fa-chevron-down faq-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            Yes! You'll receive a verifiable certificate of completion when you finish all course modules and assessments.
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    <!-- Video/Quiz Modal -->
+<div class="modal" id="content-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="modal-body">
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
+</div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Keeping track of Bookmarks
+        const courseId = 4;
+        const bookmarkBtn = document.getElementById('bookmark-btn');
+        let courseData = null;
+        
+        // Check if the user already bookmarked this 
+        if (localStorage.getItem(`bookmark-${courseId}`)) {
+            bookmarkBtn.classList.add('bookmarked');
+            bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i> Bookmarked';
+        }
+        
+        // Toggle bookmark
+        bookmarkBtn.addEventListener('click', function() {
+            this.classList.toggle('bookmarked');
+            const icon = this.classList.contains('bookmarked') ? 'fas' : 'far';
+            this.innerHTML = `<i class="${icon} fa-bookmark"></i> ${this.classList.contains('bookmarked') ? 'Bookmarked' : 'Bookmark'}`;
+            
+            // Save state
+            if (this.classList.contains('bookmarked')) {
+                localStorage.setItem(`bookmark-${courseId}`, 'true');
+            } else {
+                localStorage.removeItem(`bookmark-${courseId}`);
+            }
+        });
+
+        fetch('http://localhost:5500/api/courses/json')
+          .then(response => {
+              if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+              return response.json();
+          })
+          .then(data => {
+              console.log("DATA:", data);
+              courseData = data;
+              const course = data.courses.find(c => c.id === 4);
+              if (!course) throw new Error("Java course not found");
+              
+              // header stuff duration, etc. 
+              document.getElementById('course-title').textContent = course.title;
+              document.getElementById('course-duration').textContent = course.duration;
+              document.getElementById('course-level').textContent = course.level;
+              document.getElementById('course-content').textContent = `${course.content.length} modules`;
+              
+              // The "Read More" toggle 
+              const desc = document.getElementById('course-description');
+              desc.innerHTML = `<strong>${course.shortDescription}</strong> ${course.fullDescription}`;
+              const readMore = document.getElementById('read-more');
+              readMore.addEventListener('click', () => {
+                  desc.classList.toggle('collapsed');
+                  readMore.textContent = desc.classList.contains('collapsed') ? 'Read More' : 'Read Less';
+              });
+              
+              // Fill in the chapter stuff
+              document.getElementById('chapter-description').textContent =
+              course.chapterDescription || course.shortDescription;
+                  
+              
+              // Calculate progress
+              updateCourseProgress(course);
+              
+              // Change the button from "Start" to "Continue" if you’ve been here before
+              const startBtn = document.getElementById('start-btn');
+              const progressPercent = calculateProgressPercent(course);
+              if (progressPercent > 0) {
+                  startBtn.textContent = 'Continue Course';
+              }
+              
+              // Build chapter content
+              loadCourseContent(course);
+              
+              const instructor = data.instructors.find(i => i.id === 4);
+              if (instructor) {
+                const instructorCard = `
+                <div class="instructor-header">
+                    <img class="instructor-avatar" 
+                    src="../images/prof/prof-rowan.jpg" 
+                    alt="Professor Rowan">
+                    <div>
+                        <h3 class="instructor-name">${instructor.name}</h3>
+                        <p class="instructor-title">${instructor.legacy}</p>
+                    </div>
+                </div>
+                 <p class="instructor-bio">${instructor.bio}</p>
+            `;
+            document.getElementById('instructor-card').innerHTML = instructorCard;
+          }   
+          
+          // The popup that shows videos & quizzes
+          const modal = document.getElementById('content-modal');
+          const closeBtn = document.querySelector('.close-modal');
+
+          // Close modal when clicking X
+          closeBtn.addEventListener('click', () => {
+              modal.style.display = 'none';
+          });
+
+          // Close modal when clicking outside
+          window.addEventListener('click', (e) => {
+              if (e.target === modal) {
+                  modal.style.display = 'none';
+              }
+          });
+
+          // Load reviews here
+          const reviews = data.reviews.filter(r => r.courseId === course.id);
+          const reviewsContainer = document.getElementById('reviews-container');
+
+          if (reviews.length > 0) {
+              reviews.forEach(review => {
+                  const reviewCard = document.createElement('div');
+                  reviewCard.className = 'review-card';
+                  reviewCard.innerHTML = `
+                      <div class="review-header">
+                          <span class="review-user">${review.user}</span>
+                          <span class="review-rating">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</span>
+                      </div>
+                      <div class="review-date">${new Date(review.date).toLocaleDateString()}</div>
+                      <p class="review-comment">"${review.comment}"</p>
+                  `;
+                  reviewsContainer.appendChild(reviewCard);
+              });
+          } else {
+              reviewsContainer.innerHTML = '<p>No reviews yet. Be the first to review!</p>';
+          }
+
+          // Make FAQ answers expand/collapse 
+          document.querySelectorAll('.faq-question').forEach(question => {
+              question.addEventListener('click', () => {
+                  const answer = question.nextElementSibling;
+                  const toggle = question.querySelector('.faq-toggle');
+                  
+                  answer.classList.toggle('active');
+                  toggle.classList.toggle('active');
+              });
+          });
+
+          // Show/hide chapter details
+          document.getElementById('toggle-details').addEventListener('click', function() {
+              const chapterContent = document.getElementById('chapter-content');
+              chapterContent.classList.toggle('active');
+              this.textContent = chapterContent.classList.contains('active') ? 
+                  '▲ Hide Chapter Details' : '▼ Show Chapter Details';
+          });
+              
+          // Continue button logic
+          document.getElementById('continue-btn').addEventListener('click', function() {
+              const nextItem = course.content.find(item => !item.completed) || course.content[0];
+              loadContent(nextItem);
+          });
+          })
+          .catch(error => {
+              console.error("Fetch error:", error);
+              document.getElementById('course-title').textContent = 'Failed to load course.';
+          });
+
+          function calculateProgressPercent(course) {
+              const totalItems = course.content.length;
+              const completedItems = course.content.filter(item => item.completed).length;
+              return Math.round((completedItems / totalItems) * 100);
+          }
+
+          function updateCourseProgress() {
+              const course = courseData.courses.find(c => c.id === 4);
+              const progressPercent = calculateProgressPercent(course);
+              document.getElementById('chapter-progress').style.width = `${progressPercent}%`;
+              document.getElementById('progress-text').textContent = `${progressPercent}% Complete`;
+              
+              // Update start/continue button if needed
+              if (progressPercent > 0) {
+                  document.getElementById('start-btn').textContent = 'Continue Course';
+              }
+              
+              // Reload content to update locks
+              loadCourseContent(course);
+          }
+
+          function loadCourseContent(course) {
+              const chapterContent = document.getElementById('chapter-content');
+              chapterContent.innerHTML = '';
+              
+              course.content.forEach((item, index) => {
+                  const itemEl = document.createElement('div');
+                  const isLocked = index > 0 && !course.content[index-1].completed;
+                  itemEl.className = `content-item ${isLocked ? 'locked' : ''}`;
+                  itemEl.dataset.module = item.id;
+                  itemEl.innerHTML = `
+                      <div class="content-icon">
+                          ${item.type === 'video' ? '<i class="fas fa-play-circle"></i>' : '<i class="fas fa-question-circle"></i>'}
+                          ${isLocked ? '<i class="fas fa-lock"></i>' : ''}
+                      </div>
+                      <div class="content-title">
+                          ${index + 1}. ${item.title}
+                          ${item.type === 'quiz' ? '<span class="xp-badge">50 XP</span>' : ''}
+                          ${item.completed ? '<span class="completed-badge"><i class="fas fa-check-circle"></i></span>' : ''}
+                      </div>
+                      <div class="content-duration">${item.duration}</div>
+                  `;
+                  
+                  if (!isLocked) {
+                      itemEl.addEventListener('click', () => {
+                          loadContent(item);
+                      });
+                  }
+                  
+                  chapterContent.appendChild(itemEl);
+              });
+          }
+
+          function loadContent(content) {
+              const modal = document.getElementById('content-modal');
+              const modalBody = document.getElementById('modal-body');
+              
+              if (content.type === 'video') {
+                  modalBody.innerHTML = `
+                      <h3>${content.title}</h3>
+                      <div class="video-container">
+                          <iframe src="${content.url || '#'}" 
+                                  frameborder="0" 
+                                  allowfullscreen></iframe>
+                      </div>
+                      <p>Duration: ${content.duration}</p>
+                      <p>${content.description || ''}</p>
+                      <div class="video-completion">
+                          <button id="complete-video-btn" class="btn btn-primary">Mark as Completed</button>
+                      </div>
+                  `;
+                  
+                  document.getElementById('complete-video-btn').addEventListener('click', () => {
+                      content.completed = true;
+                      updateCourseProgress();
+                      modal.style.display = 'none';
+                  });
+              } else if (content.type === 'quiz') {
+                  modalBody.innerHTML = `
+                      <h3>${content.title}</h3>
+                      <div class="quiz-container">
+                          ${content.questions.map((q, qIndex) => `
+                              <div class="quiz-question" data-question="${qIndex}">
+                                  <p>${q.question}</p>
+                                  <div class="quiz-options">
+                                      ${q.options.map((opt, oIndex) => `
+                                          <div class="quiz-option" data-correct="${opt.correct}" data-option="${oIndex}">
+                                              ${opt.text}
+                                          </div>
+                                      `).join('')}
+                                  </div>
+                                  <div class="quiz-feedback"></div>
+                              </div>
+                          `).join('')}
+                          <button class="quiz-submit">Submit Quiz</button>
+                      </div>
+                  `;
+                  
+                  const submitBtn = modalBody.querySelector('.quiz-submit');
+                  const questions = modalBody.querySelectorAll('.quiz-question');
+                  
+                  submitBtn.addEventListener('click', () => {
+                      let allCorrect = true;
+                      
+                      questions.forEach(question => {
+                          const selected = question.querySelector('.quiz-option.selected');
+                          const feedback = question.querySelector('.quiz-feedback');
+                          
+                          if (!selected) {
+                              feedback.textContent = 'Please select an answer';
+                              feedback.className = 'quiz-feedback error';
+                              allCorrect = false;
+                              return;
+                          }
+                          
+                          const isCorrect = selected.dataset.correct === 'true';
+                          feedback.textContent = isCorrect ? 
+                              'Correct!' : 'Incorrect. The correct answer is: ' + 
+                              Array.from(question.querySelectorAll('.quiz-option'))
+                                   .find(opt => opt.dataset.correct === 'true').textContent;
+                          feedback.className = `quiz-feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+                          
+                          if (!isCorrect) allCorrect = false;
+                      });
+                      
+                      if (allCorrect) {
+                          content.completed = true;
+                          updateCourseProgress();
+                          modal.style.display = 'none';
+                      }
+                  });
+                  
+                  modalBody.querySelectorAll('.quiz-option').forEach(option => {
+                      option.addEventListener('click', () => {
+                          const question = option.closest('.quiz-question');
+                          question.querySelectorAll('.quiz-option').forEach(opt => {
+                              opt.classList.remove('selected');
+                          });
+                          option.classList.add('selected');
+                          question.querySelector('.quiz-feedback').textContent = '';
+                      });
+                  });
+              }
+              
+              modal.style.display = 'block';
+          }
+      });
+    </script>
+</body>
+</html>
